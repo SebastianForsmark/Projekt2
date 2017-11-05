@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
 
-public class QueryKeyWordHandler {
+public class OrderByHandler {
 
-    public static void handleQueryKeyWords(String[] keyWords, LinkedList<DocumentProperties> list) throws Exception {
+    public static void handleQueryKeyWords(String[] keyWords, ArrayList<DocumentProperties> list) throws Exception {
         String property = keyWords[0];
         String direction = keyWords[1];
 

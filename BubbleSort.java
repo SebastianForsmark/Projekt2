@@ -1,10 +1,13 @@
+import javafx.beans.property.ObjectProperty;
+
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 public class BubbleSort {
 
-    public static void sort(LinkedList list, Comparator c, boolean ascending) {
+    public static void sort(ArrayList list, Comparator c, boolean ascending) {
         if (list.size() < 2)
             return;
 
@@ -52,12 +55,12 @@ public class BubbleSort {
 
 
     // Swap data in current and next
-    private static void swapCurrNext(LinkedList list, int indexCurr) {
+    private static void swapCurrNext(ArrayList<DocumentProperties> list, int indexCurr) {
 
         //System.out.println(list + " Swapped: " + list.get(indexCurr) + " with " + list.get(indexCurr+1));
-        Object temp = list.get(indexCurr);
-        list.set(indexCurr, list.get(indexCurr + 1));
-        list.set(indexCurr + 1, temp);
+        DocumentProperties temp = list.get(indexCurr);
+        list.set(indexCurr, list.get(indexCurr+1));
+        list.set(indexCurr+1,temp);
 
     }
 
