@@ -29,10 +29,9 @@ public class TinySearchEngine implements TinySearchEngineBase {
      */
     public void insert(Sentence sentence, Attributes attributes) {
 
-        // How many times does a word appear in a document? => docProp
-        // How many words are there in a document? => Keep hashMap for <doc, #words>
-        // How many documents in total? => Keep list of all docs while indexing save its length when done
-        // How many documents contain a word? => length of docProp list
+        // NOTE: updateStatistics and several other things were created in preparation for Relevance "tf-idf" calculations
+        // however I had trouble and do did not have enough time to create the algorithm and sorting for it so if you
+        // see strange code that seems out of place then that's probably why.
 
         updateStatistics(sentence, attributes);
 
@@ -83,7 +82,10 @@ public class TinySearchEngine implements TinySearchEngineBase {
 
             if (keys[i].equalsIgnoreCase("orderby")) {
                 if (!setsOfResults.isEmpty())
-                    result.addAll(combineSubsets(setsOfResults, operators));
+                    if (!operators.isEmpty())
+                         result.addAll(combineSubsets(setsOfResults, operators));
+                    else
+                        result.addAll(setsOfResults.get(0));
 
                 try {
                     String[] queryKeyWords = {keys[i + 1], keys[i + 2]};
@@ -386,7 +388,7 @@ public class TinySearchEngine implements TinySearchEngineBase {
 
 
     private ArrayList<DocumentProperties> retrieveFromCache(String cacheKey) {
-        System.out.println("Retrieved from cache!");
+        System.out.println("Retrieved "+cacheKey+" from cache!");
         return cache.get(cacheKey);
     }
 
@@ -397,7 +399,7 @@ public class TinySearchEngine implements TinySearchEngineBase {
         cacheKey.append(splitKey[0] + " " + splitKey[1] + " " + splitKey[2]);
         return cacheKey.toString();
     }
-    
+
 
 }
 
